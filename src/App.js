@@ -7,8 +7,7 @@ function App(props) {
   // we're calling our custom hooks here, and passing the parameters we defined in input.js
   const [breed, setBreed] = useLocalStorage("breed", "husky");
   const [count, setCount] = useLocalStorage("count", 1);
-  // we don't need setImages anymore, since we never call it
-  const [images] = useDogImages(breed, count);
+  const [images, setImages] = useDogImages(breed, count);
 
   return (
     <>
@@ -23,7 +22,7 @@ function App(props) {
 
       <input
         type="number"
-        placeholder="Image Count"
+        placeholder="Count"
         value={count}
         onChange={e => setCount(e.target.value)}
       />
@@ -33,6 +32,10 @@ function App(props) {
           <img key={index} src={image} alt="Dog" />
         ))}
       </div>
+
+      <button onClick={() => setImages([])}>
+        Clear Images
+      </button>
     </>
   );
 }
